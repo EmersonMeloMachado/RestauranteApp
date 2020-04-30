@@ -13,4 +13,4 @@ XamarinForms 4.6.0.726
 
 
 # Android
-<img src="https://github.com/EmersonMeloMachado/EntryLabelFloating/blob/master/EntryLabelFloating/EntryLabelFloating/Android.gif?w=250" height="450" width="200">
+<img src="https://github.com/EmersonMeloMachado/RestauranteApp/blob/master/Gif/20200430_034202.gif?w=250" height="450" width="200">
