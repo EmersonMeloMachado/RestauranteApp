@@ -1,0 +1,264 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:local="clr-namespace:RestauranteApp.ViewModel"
+             x:DataType="local:CardapioPageViewModel"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" 
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations" 
+             xmlns:pancakeview="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" 
+             xmlns:custom="clr-namespace:RestauranteApp.Custom" 
+             xmlns:Model="clr-namespace:RestauranteApp.Model"
+             mc:Ignorable="d"
+             x:Class="RestauranteApp.View.CardapioPage">
+    <ContentPage.Resources>
+        <Style TargetType="Grid">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor"
+                                        Value="#fabe7f" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid x:Name="Painel">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid RowSpacing="0"  
+                  x:Name="Top"
+                  VerticalOptions="FillAndExpand"
+                  HorizontalOptions="FillAndExpand"
+                  Margin="0,15,0,0"
+                  HeightRequest="120">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <StackLayout Grid.Row="0"
+                             BackgroundColor="#fbfbfb"
+                             Spacing="0"
+                             TranslationY="0"
+                             VerticalOptions="FillAndExpand">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <pancakeview:PancakeView
+                                     Grid.Row="0"
+                                     Grid.Column="0"
+                                     x:Name="pancake"
+                                     Margin="20,0,10,0"
+                                     Padding="5"
+                                     BackgroundColor="#6633919c"
+                                     CornerRadius="4"
+                                     Opacity=".7"
+                                     VerticalOptions="CenterAndExpand">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0"
+                                       x:Name="lblLupa"
+                                       Text="&#xf002;"
+                                       Margin="15,0"
+                                       TextColor="#33919c"
+                                       HorizontalTextAlignment="Center"
+                                       VerticalTextAlignment="Center"
+                                       FontFamily="FontAwesomeBold"/>
+
+                                <custom:CustomEntry
+                                        x:Name="txtPesquisa"
+                                        Focused="txtPesquisa_Focused"
+                                        Unfocused="txtPesquisa_Unfocused"
+                                        Grid.Column="1"
+                                        BorderColor="Transparent"
+                                        IsVisibleBorder="False"
+                                        BorderWidth="0"
+                                        FontAttributes="Italic"
+                                        HeightRequest="{d:OnPlatform iOS='40'}"
+                                        WidthRequest="100"
+                                        TextColor="Black" />
+
+
+                            </Grid>
+                        </pancakeview:PancakeView>
+                        <StackLayout Grid.Row="1">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="auto" />
+                                </Grid.ColumnDefinitions>
+                                <Label FontSize="Medium" TextColor="#6633919c" Margin="20,0,10,0" Grid.Column="0" Text="Filtrar por Tipo"/>
+                                <Label
+                                    Grid.Column="1"
+                                    Margin="{OnPlatform Android='0,5,5,0',iOS='0,0,5,0'}"
+                                    FontSize="Large"
+                                    FontFamily="FontAwesomeBold"
+                                    Opacity="0.6"
+                                    Text="&#xf0b0; "
+                                    TextColor="#6633919c"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalTextAlignment="Center">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+
+                            </Grid>
+
+                        </StackLayout>
+                    </Grid>
+                </StackLayout>
+            </Grid>
+
+            <StackLayout x:Name="stack" 
+                         Grid.Row="1" 
+                         Margin="20,0,10,0"
+                         HorizontalOptions="FillAndExpand"
+                         VerticalOptions="Center"
+                         BackgroundColor="#6633919c"
+                         Opacity=".7"
+                         HeightRequest="0">
+                <StackLayout x:Name="Tipo1" Orientation="Horizontal" TranslationY="10">
+                    <CheckBox IsChecked="{Binding IsCarne}" Color="#33919c" />
+                    <Label  Text="Carne" TextColor="#33919c" FontSize="Medium"/>
+                    <CheckBox IsChecked="{Binding IsFrango}" Color="#33919c" />
+                    <Label Text="Frango" TextColor="#33919c" FontSize="Medium"/>
+                    <CheckBox IsChecked="{Binding IsMassa}" Color="#33919c" />
+                    <Label Text="Massa" TextColor="#33919c" FontSize="Medium"/>
+                </StackLayout>
+                <StackLayout x:Name="Tipo2" Orientation="Horizontal">
+                    <CheckBox IsChecked="{Binding IsPeixe}" Color="#33919c" />
+                    <Label Text="Peixe" TextColor="#33919c" FontSize="Medium"/>
+                    <CheckBox IsChecked="{Binding IsPorcoes}" Color="#33919c" />
+                    <Label Text="Porções" TextColor="#33919c" FontSize="Medium"/>
+                </StackLayout>
+            </StackLayout>
+            <pancakeview:PancakeView Grid.Row="2"
+                                     x:Name="lCardapio"
+                                     BackgroundColor="#fabe7f"
+                                     CornerRadius="100,0,0,0"
+                                     HeightRequest="100"
+                                     HasShadow="True"
+                                     IsClippedToBounds="True"
+                                     Padding="0"
+                                     HorizontalOptions="FillAndExpand"
+                                     VerticalOptions="FillAndExpand" >
+                <CollectionView 
+                        Margin="20,30"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand"
+                        SelectionMode="Single"
+                        ItemsUpdatingScrollMode="KeepItemsInView"
+                        ItemsSource="{Binding Cardapio}"
+                        SelectedItem="{Binding ItemSelected}"
+                        SelectionChangedCommandParameter="{Binding ItemSelected}"
+                        SelectionChangedCommand="{Binding SelectedCommand, Mode=TwoWay}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="Model:Cardapio">
+                            <Grid Margin="5,5,5,0" HorizontalOptions="FillAndExpand">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="120" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="20" />
+                                    <RowDefinition Height="auto" />
+                                </Grid.RowDefinitions>
+                                <ffimageloading:CachedImage Grid.Row="0"
+                                                            Grid.RowSpan="3"
+                                                            Grid.Column="0"
+                                                            Margin="10,10,5,0"
+                                                            Aspect="AspectFit"
+                                                            CacheDuration="7"
+                                                            VerticalOptions="CenterAndExpand"
+                                                            Source="{Binding Foto}">
+                                    <ffimageloading:CachedImage.Transformations>
+                                        <fftransformations:RoundedTransformation Radius="0" />
+                                    </ffimageloading:CachedImage.Transformations>
+                                </ffimageloading:CachedImage>
+                                <StackLayout Grid.Row="0" 
+                                             Grid.Column="1" 
+                                             Orientation="Horizontal" 
+                                             HorizontalOptions="FillAndExpand">
+                                    <Label 
+                                       Margin="0,10,0,0"
+                                       FontSize="14"
+                                       HorizontalOptions="Start"
+                                       HorizontalTextAlignment="Start"
+                                       LineBreakMode="TailTruncation"
+                                       Text="{Binding Nome}"
+                                       TextColor="Black"
+                                       VerticalOptions="CenterAndExpand" />
+
+                                    <Label 
+                                       HorizontalOptions="EndAndExpand"
+                                       HorizontalTextAlignment="Start"
+                                       VerticalOptions="CenterAndExpand">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span 
+                                                  FontSize="16"
+                                                  Text="&#xf005;"
+                                                  TextColor="#33919c"
+                                                  FontFamily="FontAwesomeBold" />
+
+                                                <Span FontSize="13"
+                                                  Text="{Binding Nota}"
+                                                  TextColor="#33919c" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </StackLayout>
+                                <Label Grid.Row="1"
+                                       Grid.Column="1"
+                                       FontSize="13"
+                                       Text="{Binding Culinaria}"
+                                       HorizontalOptions="FillAndExpand"/>
+
+                                <Frame
+                                      Grid.Row="2"
+                                      Grid.Column="1"
+                                      Margin="0,0,50,0"
+                                      Padding="5,0,5,0"
+                                      BackgroundColor="#33919c"
+                                      CornerRadius="120"
+                                      HasShadow="False"
+                                      HeightRequest="40"
+                                      VerticalOptions="Center" 
+                                      HorizontalOptions="FillAndExpand">
+
+                                    <Label BackgroundColor="#33919c"
+                                           HorizontalTextAlignment="Center"
+                                           Text="Ver detalhes"
+                                           TextColor="White"
+                                           VerticalTextAlignment="Center" />
+                                </Frame>
+
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </pancakeview:PancakeView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

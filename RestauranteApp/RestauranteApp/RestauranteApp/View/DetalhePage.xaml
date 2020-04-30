@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:pancakeview="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             mc:Ignorable="d"
+             x:Class="RestauranteApp.View.DetalhePage">
+    <ContentPage.Content>
+        <ScrollView>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <StackLayout Grid.Row="0">
+                </StackLayout>
+
+                <StackLayout Grid.Row="1"
+                     VerticalOptions="EndAndExpand">
+
+                    <pancakeview:PancakeView BackgroundColor="#fabe7f"
+                                         CornerRadius="60,60,0,0"
+                                         HeightRequest="500"
+                                         HasShadow="True"
+                                         IsClippedToBounds="True"
+                                         Padding="0"
+                                         HorizontalOptions="Fill"
+                                         VerticalOptions="FillAndExpand">
+                        <StackLayout HorizontalOptions="FillAndExpand"
+                                 VerticalOptions="EndAndExpand"
+                                 Margin="0,90">
+                            <Label Margin="30,0"
+                           HorizontalTextAlignment="Start"
+                           VerticalTextAlignment="Center">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span FontSize="20" Text="Prato: " TextColor="#33919c" />
+                                        <Span FontSize="20" Text="{Binding Cardapio.Nome}" TextColor="#33919c" />
+                                        <Span Text="&#10;" />
+                                        <Span FontSize="20" Text="Culinária: " TextColor="#33919c" />
+                                        <Span FontSize="20" Text="{Binding Cardapio.Culinaria}" TextColor="#33919c" />
+                                        <Span Text="&#10;" />
+                                        <Span FontSize="20" Text="Nota: " TextColor="#33919c" />
+                                        <Span FontSize="20" Text="{Binding Cardapio.Nota}" TextColor="#33919c" />
+                                        <Span FontSize="20" Text="&#xf005;" TextColor="#33919c" FontFamily="FontAwesomeBold" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+                            <Button Grid.Row="2"
+                                Grid.Column="1"
+                                Margin="50,20"
+                                Text="Adcionar ao carrinho"
+                                Style="{StaticResource ButtonLista}"/>
+                        </StackLayout>
+
+                    </pancakeview:PancakeView>
+                </StackLayout>
+
+                <pancakeview:PancakeView Grid.Row="1"
+                                     x:Name="Imagen_01"
+                                     TranslationY="-200"
+                                     BackgroundColor="White"
+                                     CornerRadius="150"
+                                     HeightRequest="250"
+                                     WidthRequest="250"
+                                     HasShadow="True"
+                                     Padding="0"
+                                     HorizontalOptions="CenterAndExpand"
+                                     VerticalOptions="CenterAndExpand" >
+
+                    <ffimageloading:CachedImage Aspect="AspectFill"
+                                            CacheDuration="7"
+                                            HeightRequest="250"
+                                            WidthRequest="250"
+                                            Source="{Binding Cardapio.Foto}">
+                        <ffimageloading:CachedImage.Transformations>
+                            <fftransformations:RoundedTransformation Radius="0" />
+                        </ffimageloading:CachedImage.Transformations>
+                    </ffimageloading:CachedImage>
+                </pancakeview:PancakeView>
+
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
